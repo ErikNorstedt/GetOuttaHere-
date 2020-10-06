@@ -10,10 +10,11 @@ public class CameraController : MonoBehaviour
 
     public float rotateSpeed;
 
-    public Transform Pivot;
+    public Transform pivot;
 
     public float maxViewAngle;
     public float minViewAngle;
+    public float targetHeight;
 
     // Start is called before the first frame update
     void Start()
@@ -23,8 +24,8 @@ public class CameraController : MonoBehaviour
         offset = target.position - transform.position;
         }
 
-        Pivot.transform.position = target.transform.position;
-        Pivot.transform.parent = target.transform;
+        pivot.transform.position = target.transform.position;
+        pivot.transform.parent = target.transform;
 
         Cursor.lockState = CursorLockMode.Locked;
 
@@ -39,37 +40,36 @@ public class CameraController : MonoBehaviour
 
         //get the Y pos of the mouse and rotatethe pivot.
         float vertical = Input.GetAxis("Mouse Y") * rotateSpeed;
-        Pivot.Rotate(-vertical, 0, 0);
+        pivot.Rotate(-vertical, 0, 0);
 
         //move the cam based on target current rotation and the offset
         float desiredYAngle = target.eulerAngles.y;
-        float desiredXAngle = Pivot.eulerAngles.x;
+        float desiredXAngle = pivot.eulerAngles.x;
 
         //Limit the up/down camera rotation
 
-        if (Pivot.rotation.eulerAngles.x > maxViewAngle && Pivot.rotation.eulerAngles.x < 180f)
+        if (pivot.rotation.eulerAngles.x > maxViewAngle && pivot.rotation.eulerAngles.x < 180f)
         {
-            Pivot.rotation = Quaternion.Euler(maxViewAngle, 0, 0);
+            pivot.rotation = Quaternion.Euler(maxViewAngle, 0, 0);
         }
 
-        if (Pivot.rotation.eulerAngles.x > 180f && Pivot.rotation.eulerAngles.x < 360f + minViewAngle)
+        if (pivot.rotation.eulerAngles.x > 180f && pivot.rotation.eulerAngles.x < 360f + minViewAngle)
         {
-            Pivot.rotation = Quaternion.Euler(360f + minViewAngle, 0, 0);
+            pivot.rotation = Quaternion.Euler(360f + minViewAngle, 0, 0);
         }
 
             Quaternion rotation = Quaternion.Euler(desiredXAngle, desiredYAngle, 0);
 
         transform.position = target.position; //- (rotation * offset);
-        transform.rotation = Quaternion.Euler(transform.eulerAngles.x, target.rotation.y, transform.eulerAngles.z);
-        //transform.position = target.position - offset;
+        transform.rotation = Quaternion.Euler(pivot.eulerAngles.x, target.eulerAngles.y, pivot.eulerAngles.z);
 
+        //Move camera by offset away from target
         transform.Translate(offset, Space.Self);
 
-        if(transform.position.y < target.position.y)
+        //Set camera height to not go below the targetheight threshold
+        if(transform.position.y < target.position.y - targetHeight)
         {
-            transform.position = new Vector3(transform.position.x, target.position.y - 0.5f, transform.position.z);
+            transform.position = new Vector3(transform.position.x, target.position.y - targetHeight, transform.position.z);
         }
-
-        //transform.LookAt(target);
     }
 }

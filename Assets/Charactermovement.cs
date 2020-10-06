@@ -12,6 +12,9 @@ public class Charactermovement : MonoBehaviour
     private Vector3 moveDirection;
     public float gravityScale;
 
+    public float jumpRememberPressedTime;
+    private float jumpRememberPressed = 0;
+
 
     // Start is called before the first frame update
     void Start()
@@ -28,11 +31,19 @@ public class Charactermovement : MonoBehaviour
         moveDirection = moveDirection.normalized * moveSpeed;
         moveDirection.y = yStore;
 
+        jumpRememberPressed -= Time.deltaTime;
+        if (Input.GetButtonDown("Jump"))
+        {
+            jumpRememberPressed = jumpRememberPressedTime;
+        }
+
         if (controller.isGrounded)
         {
             moveDirection.y = 0f;
-             if (Input.GetButton("Jump"))
+
+             if (jumpRememberPressed > 0f)
              {
+                jumpRememberPressed = 0f;
                  moveDirection.y = jumpForce;
              }
         
