@@ -38,7 +38,7 @@ public class CameraController : MonoBehaviour
         float horizontal = Input.GetAxis("Mouse X") * rotateSpeed;
         target.Rotate(0, horizontal, 0);
 
-        //get the Y pos of the mouse and rotatethe pivot.
+        //get the Y pos of the mouse and rotate the pivot.
         float vertical = Input.GetAxis("Mouse Y") * rotateSpeed;
         pivot.Rotate(-vertical, 0, 0);
 
