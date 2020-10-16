@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Mine : MonoBehaviour
 {
-    public ParticleSystem boomParticle;
+    
     public GameObject mine;
     // Start is called before the first frame update
     void Start()
@@ -18,8 +18,7 @@ public class Mine : MonoBehaviour
         
         if(collision.gameObject.tag == "Player")
         {
-            boomParticle.Play();
-            boomParticle.transform.parent = transform.parent;   
+           
             Vector3 hitdirection = collision.transform.position - transform.position;
                hitdirection = hitdirection.normalized;
 
