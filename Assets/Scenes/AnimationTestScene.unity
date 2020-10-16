@@ -265,7 +265,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 9950cbb5181faba4ca0d7dced3e69d56, type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 9950cbb5181faba4ca0d7dced3e69d56, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -379,7 +379,11 @@ Transform:
   m_LocalScale: {x: 13.572, y: 13.572, z: 13.572}
   m_Children: []
   m_Father: {fileID: 0}
+<<<<<<< HEAD
   m_RootOrder: 5
+=======
+  m_RootOrder: 4
+>>>>>>> main
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1489491829
 GameObject:
@@ -471,6 +475,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
+<<<<<<< HEAD
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
 --- !u!1 &1669387933 stripped
@@ -497,6 +502,10 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+=======
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
+>>>>>>> main
 --- !u!1 &1741260144 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: cde496e3db994e64e85aec404e445621, type: 3}
@@ -558,7 +567,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: cde496e3db994e64e85aec404e445621, type: 3}
       propertyPath: m_RootOrder
+<<<<<<< HEAD
       value: 2
+=======
+      value: 1
+>>>>>>> main
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: cde496e3db994e64e85aec404e445621, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
