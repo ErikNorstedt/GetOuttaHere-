@@ -390,7 +390,8 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 1, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 1376645087}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -401,19 +402,49 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 810569063}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 29267aee6fe42a74d987980c7c977992, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 1396636003}
-  offset: {x: 2, y: 1, z: -5}
+  offset: {x: 2.5, y: 1, z: -4}
   useOffsetValues: 1
   rotateSpeed: 5
-  pivot: {fileID: 0}
+  pivot: {fileID: 1376645087}
   maxViewAngle: 45
   minViewAngle: -45
   targetHeight: 0.5
+--- !u!1 &1376645086
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1376645087}
+  m_Layer: 0
+  m_Name: pivot
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1376645087
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1376645086}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 810569066}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1396635998
 GameObject:
   m_ObjectHideFlags: 0
@@ -425,8 +456,8 @@ GameObject:
   - component: {fileID: 1396636003}
   - component: {fileID: 1396636002}
   - component: {fileID: 1396636001}
-  - component: {fileID: 1396636000}
   - component: {fileID: 1396635999}
+  - component: {fileID: 1396636000}
   - component: {fileID: 1396636004}
   m_Layer: 0
   m_Name: Capsule
@@ -540,5 +571,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 99816982fd7a91f4db0ffe93bb7596e6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rb: {fileID: 0}
-  speed: 300
+  rb: {fileID: 1396635999}
+  speed: 500
+  jumpForce: 100
