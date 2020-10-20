@@ -5,14 +5,16 @@ using UnityEngine;
 public class PhysicsMovement : MonoBehaviour
 {
     public Rigidbody rb;
-    public float speed;
-    private Vector3 moveDirection;
+    public float maxSpeed;
+    public float maxAcceleration;
     public float jumpForce;
 
-    private bool shouldJump;
+    bool isGrounded;
+    float jumpRememberPressed;
+    float jumpRememberPressedTime;
 
-    public float jumpRememberPressedTime;
-    private float jumpRememberPressed = 0;
+    public Vector3 desiredVelocity;
+    Vector3 velocity;
 
     // Start is called before the first frame update
     void Start()
@@ -22,37 +24,34 @@ public class PhysicsMovement : MonoBehaviour
 
     void Update()
     {
-        
-    }
-    // Update is called once per frame
-    void FixedUpdate()
-    {
+        //Horizontal movement derived from a tutorial at catlikecoding.com
+        desiredVelocity = transform.TransformDirection(Input.GetAxisRaw("Horizontal"), 0f, Input.GetAxisRaw("Vertical")) * maxSpeed;
 
-        float yStore = moveDirection.y;
-        moveDirection = (transform.forward * Input.GetAxisRaw("Vertical") + transform.right * Input.GetAxisRaw("Horizontal"));
-        
-        moveDirection.y = yStore;
+        velocity = rb.velocity;
 
-        rb.velocity = new Vector3(moveDirection.x, rb.velocity.y, moveDirection.z).normalized * speed* Time.deltaTime;
-        rb.velocity = rb.velocity.normalized;
+        float maxSpeedDelta = maxAcceleration * Time.deltaTime;
+        velocity.x = Mathf.MoveTowards(velocity.x, desiredVelocity.x, maxSpeedDelta);
+        velocity.z = Mathf.MoveTowards(velocity.z, desiredVelocity.z, maxSpeedDelta);
+
 
         jumpRememberPressed -= Time.deltaTime;
         if (Input.GetButtonDown("Jump"))
         {
-            rb.AddForce(Vector3.up * jumpForce);
-            //jumpRememberPressed = jumpRememberPressedTime;
+            jumpRememberPressed = jumpRememberPressedTime;
         }
 
-     /*   if (rb)
+        if (isGrounded && jumpRememberPressed > 0f) //TODO: determine isGrounded
         {
-            //moveDirection.y = 0f;
-            if (jumpRememberPressed > 0f)
-            {
-                jumpRememberPressed = 0f;
-                moveDirection.y = jumpForce;
-            }
+            jumpRememberPressed = 0f;
+            velocity.y = jumpForce;
+        }
 
-        }*/
+        rb.velocity = velocity;
+    }
+
+    // Update is called once per frame
+    void FixedUpdate()
+    {
 
     }
 }
