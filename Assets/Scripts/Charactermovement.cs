@@ -32,17 +32,16 @@ public class Charactermovement : MonoBehaviour
         //moveDirection = new Vector3(Input.GetAxis("Horizontal") * moveSpeed, moveDirection.y, Input.GetAxis("Vertical") * moveSpeed);
         if (knockBackCounter <= 0)
         {
+            float yStore = moveDirection.y;
+            moveDirection = (transform.forward * Input.GetAxisRaw("Vertical") + transform.right * Input.GetAxisRaw("Horizontal"));
+            moveDirection = moveDirection.normalized * moveSpeed;
+            moveDirection.y = yStore;
 
-        float yStore = moveDirection.y;
-        moveDirection = (transform.forward * Input.GetAxisRaw("Vertical") + transform.right * Input.GetAxisRaw("Horizontal"));
-        moveDirection = moveDirection.normalized * moveSpeed;
-        moveDirection.y = yStore;
-
-        jumpRememberPressed -= Time.deltaTime;
-        if (Input.GetButtonDown("Jump"))
-        {
-            jumpRememberPressed = jumpRememberPressedTime;
-        }
+            jumpRememberPressed -= Time.deltaTime;
+            if (Input.GetButtonDown("Jump"))
+            {
+                jumpRememberPressed = jumpRememberPressedTime;
+            }
 
             if (controller.isGrounded)
             {
@@ -55,10 +54,10 @@ public class Charactermovement : MonoBehaviour
                 }
             }
         }
-            else
-            {
-                knockBackCounter -= Time.deltaTime;
-            }
+        else
+        {
+            knockBackCounter -= Time.deltaTime;
+        }
         moveDirection.y = moveDirection.y + (Physics.gravity.y * gravityScale * Time.deltaTime);
         controller.Move(moveDirection * Time.deltaTime);
         //moveDirection = moveDirection.normalized;
