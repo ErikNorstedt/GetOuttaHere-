@@ -10,6 +10,7 @@ public class PhysicsMovement : MonoBehaviour
     public float jumpForce;
 
     bool isGrounded;
+
     float jumpRememberPressed;
     float jumpRememberPressedTime;
 
@@ -38,6 +39,7 @@ public class PhysicsMovement : MonoBehaviour
         if (Input.GetButtonDown("Jump"))
         {
             jumpRememberPressed = jumpRememberPressedTime;
+            
         }
 
         if (isGrounded && jumpRememberPressed > 0f) //TODO: determine isGrounded
@@ -52,6 +54,6 @@ public class PhysicsMovement : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-
+        
     }
 }
