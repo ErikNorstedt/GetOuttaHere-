@@ -44,7 +44,11 @@ public class StickyBomb : MonoBehaviour
     }
     private void OnCollisionEnter(Collision other)
     {
-        rb.velocity = new Vector3(0f,0f,0f);
+        //makes it stop and starts the countdown to the boom!
+
+        //might need to be fixed since it stops the parented object aswell...
+       
+        rb.velocity = new Vector3(0f, 0f, 0f);     
         speed = 0f;
         Debug.Log("Stuck");
         startCountdown = true;
@@ -53,11 +57,15 @@ public class StickyBomb : MonoBehaviour
             //bullet.GetComponent<SphereCollider>().isTrigger = true;
             bullet.GetComponent<SphereCollider>().enabled = false;
 
-        if (other.gameObject.name == "Player")
-        { 
-        bullet.transform.SetParent(other.transform);
-        bullet.transform.parent = other.transform;
-        }
+        if (other.gameObject.tag == "Player")
+        {
+            //Connects the bomb to the player (could be changed to all moving things later on)
+            bullet.AddComponent<FixedJoint>().connectedBody = other.rigidbody;
+
+
+            /*bullet.transform.SetParent(other.transform);
+            bullet.transform.parent = other.transform;*/
+        }    
         
         
     }
